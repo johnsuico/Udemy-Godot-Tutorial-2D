@@ -5,7 +5,7 @@ class_name Gem
 # Creating a custom signal
 signal gem_off_screen
 
-const SPEED: float = 100.0
+const SPEED: float = 200.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -29,6 +29,6 @@ func die() -> void:
 	set_process(false)		# Stops gem from falling
 	queue_free()			# Removes the gem from the scene, making it disappear
 
-func _on_area_entered(area: Area2D) -> void:
+func _on_area_entered(_area: Area2D) -> void:
 	print('Gem hits paddle')
 	die()

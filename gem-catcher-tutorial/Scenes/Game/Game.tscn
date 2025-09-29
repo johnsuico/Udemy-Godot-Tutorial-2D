@@ -20,10 +20,10 @@ texture = ExtResource("1_rdw05")
 [node name="Paddle" parent="." instance=ExtResource("2_gwu2e")]
 position = Vector2(585, 597)
 
-[node name="Timer" type="Timer" parent="."]
+[node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
 script = SubResource("GDScript_xbxml")
 
 [connection signal="area_entered" from="Paddle" to="." method="_on_paddle_area_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_timer_timeout"]
