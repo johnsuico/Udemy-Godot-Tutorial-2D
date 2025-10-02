@@ -11,9 +11,12 @@ config_version=5
 [application]
 
 config/name="Gem Catcher Tutorial"
-run/main_scene="uid://dk6h24kg8s1yy"
-config/features=PackedStringArray("4.4", "Mobile")
-config/icon="res://icon.svg"
+run/main_scene="uid://g26y4k5imcq6"
+config/features=PackedStringArray("4.5", "Mobile")
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [editor]
 
@@ -35,4 +38,5 @@ move_right={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"

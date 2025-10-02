@@ -1,29 +1,49 @@
-[gd_scene load_steps=5 format=3 uid="uid://dk6h24kg8s1yy"]
+[gd_scene load_steps=6 format=3 uid="uid://g26y4k5imcq6"]
 
-[ext_resource type="Script" uid="uid://id10ccj0ukah" path="res://Scenes/Game/Game.gd" id="1_ln2h6"]
+[ext_resource type="Script" uid="uid://drgqwej0mc25s" path="res://Scenes/Game/Game.gd" id="1_ln2h6"]
 [ext_resource type="Texture2D" uid="uid://6r4hnveks2nv" path="res://assets/GameBg.png" id="1_rdw05"]
-[ext_resource type="PackedScene" uid="uid://b4wqb1e5atwth" path="res://Scenes/Paddle/Paddle.tscn" id="2_gwu2e"]
-
-[sub_resource type="GDScript" id="GDScript_xbxml"]
-script/source = "extends Timer
-
-"
+[ext_resource type="PackedScene" uid="uid://cxe0tsynlndt6" path="res://Scenes/Paddle/Paddle.tscn" id="2_gwu2e"]
+[ext_resource type="AudioStream" uid="uid://djkbtoo8xe2tv" path="res://assets/bgm_action_5.mp3" id="4_ln2h6"]
+[ext_resource type="AudioStream" uid="uid://iw2c4ykivrp2" path="res://assets/spell1_0.wav" id="5_y3kpf"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_ln2h6")
 
-[node name="GameBG" type="Sprite2D" parent="."]
-position = Vector2(563, 324)
-scale = Vector2(0.674074, 0.674074)
+[node name="BG" type="Sprite2D" parent="."]
+position = Vector2(572, 326)
+scale = Vector2(0.62, 0.62)
 texture = ExtResource("1_rdw05")
 
 [node name="Paddle" parent="." instance=ExtResource("2_gwu2e")]
-position = Vector2(585, 597)
+position = Vector2(517, 600)
 
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
-script = SubResource("GDScript_xbxml")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ln2h6")
+volume_db = -25.0
+autoplay = true
+
+[node name="ScoreSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_y3kpf")
+volume_db = -25.0
+
+[node name="Score" type="Label" parent="."]
+offset_left = 44.0
+offset_top = 18.0
+offset_right = 84.0
+offset_bottom = 41.0
+theme_override_colors/font_color = Color(0.12156863, 1, 0.6313726, 1)
+theme_override_colors/font_shadow_color = Color(0.49411765, 0.56078434, 0.5529412, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 6
+theme_override_font_sizes/font_size = 48
+text = "000"
 
 [connection signal="area_entered" from="Paddle" to="." method="_on_paddle_area_entered"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_timer_timeout"]

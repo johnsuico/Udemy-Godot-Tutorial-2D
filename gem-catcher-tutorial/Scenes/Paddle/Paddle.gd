@@ -1,6 +1,8 @@
 extends Area2D
 
-const PADDLESPEED: float = 500.0
+# Const variables
+const SPEED: float = 400.0
+const MARGIN: float = 50
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -9,24 +11,23 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	# Controlling paddle movement
+	# Old method
+	#if Input.is_action_pressed("move_left"):
+	#	position.x -= SPEED * delta
+	#if Input.is_action_pressed("move_right"):
+	#	position.x += SPEED * delta
 	
-	# This controls movement
-	# Create a float variable called "movement"
-	# Input.get_axis for left and right movement
-		# Will return a -1, 0 , +1
-			# -1 (left), 0 (don't move), +1 (right)
-			# Multiply thaat by paddle speed and delta to dictate if it's negative or position indicating either to move left or right
-	var movement: float = Input.get_axis("move_left", "move_right")
-	position.x += PADDLESPEED * delta * movement
-	
-	# This controls player position to stay on the screen
-	# Keep value to be constrained in between the min and max values
-	position.x = clampf(
-		position.x,							# Value to be constrained
-		get_viewport_rect().position.x,		# Value minimum = 0
-		get_viewport_rect().end.x			# Value maximum = Edge of viewport, 1152.0 in this case but could vary depending on size of viewport
-	)
+	# Controlling paddle movement
+	# Using Input.get_axis instead, much cleaner code
+	var movement: float = Input.get_axis("move_left", "move_right") # move_left would give -1 and move_right would give +1. 
+	position.x += SPEED * delta * movement
 
+	# Restrict the movement of the paddle to within the screen bounds
+	# Margin is used to account for the width of the paddle, makes it stop at the paddle ends instead of the middle
+	position.x = clampf(position.x, get_viewport_rect().position.x + MARGIN, get_viewport_rect().end.x - MARGIN)
 
-#func _on_area_entered(area: Area2D) -> void:
-	#print('Something hit the paddle')
+# Exercise using signals
+# Detect when the paddle does a collision
+func _on_area_entered(_area: Area2D) -> void:
+	pass
