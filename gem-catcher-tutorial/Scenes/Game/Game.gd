@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Game
+
 # Load the GEM scene / refer to it
 const GEM = preload("uid://bmyvhk527gvw4")
 const EXPLODE = preload("uid://c3btbgswv8c0r")
@@ -11,12 +13,27 @@ const EXPLODE = preload("uid://c3btbgswv8c0r")
 @onready var background_music: AudioStreamPlayer = $BackgroundMusic
 @onready var score: Label = $Score
 
+# Cache view port size to prevent calling it every frame
+# Static vars can be called anywhere including the children nodes
+static var _vp_r: Rect2
+
 # Score var
 var game_score: int = 0
 
 # Function that executes the moment game is run
 func _ready() -> void:
+	update_vp()
+	get_viewport().size_changed.connect(update_vp)
 	spawn_gem()
+
+# Update the view port size by getting the view port
+func update_vp() -> void:
+	_vp_r = get_viewport_rect()
+	
+# Getter function for vpr
+# Also make it available everywhere
+static func get_vpr() -> Rect2:
+	return _vp_r
 
 # Signal to detect if something hits the paddle
 # From game scene connected to paddle scene to detect collision
@@ -41,7 +58,7 @@ func _on_timer_timeout() -> void:
 # Function to spawn a gem randomly
 func spawn_gem() -> void:
 	var new_gem: Gem = GEM.instantiate()
-	var x_pos: float = randf_range(get_viewport_rect().position.x, get_viewport_rect().end.x)
+	var x_pos: float = randf_range(get_vpr().position.x, get_vpr().end.x)
 	new_gem.position = Vector2(x_pos, -50.0)
 	new_gem.gem_off_screen.connect(_on_gem_off_screen) # New gem is connected to gem_off_screen signal from GEM which calls on _on_gem_off_scene function
 	add_child(new_gem)

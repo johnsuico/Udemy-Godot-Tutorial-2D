@@ -18,9 +18,8 @@ func _process(delta: float) -> void:
 	# Makes the gem fall down
 	position.y += SPEED * delta
 	
-	if position.y > get_viewport_rect().end.y:
+	if position.y > Game.get_vpr().end.y:
 		gem_off_screen.emit()
-		print('Gem falls off')
 		die()
 
 # Signal to detect if the GEM hits something

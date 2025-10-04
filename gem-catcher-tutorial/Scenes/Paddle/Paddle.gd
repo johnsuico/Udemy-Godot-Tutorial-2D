@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 
 	# Restrict the movement of the paddle to within the screen bounds
 	# Margin is used to account for the width of the paddle, makes it stop at the paddle ends instead of the middle
-	position.x = clampf(position.x, get_viewport_rect().position.x + MARGIN, get_viewport_rect().end.x - MARGIN)
+	position.x = clampf(position.x, Game.get_vpr().position.x + MARGIN, Game.get_vpr().end.x - MARGIN)
 
 # Exercise using signals
 # Detect when the paddle does a collision
