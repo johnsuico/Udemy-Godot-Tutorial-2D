@@ -8,9 +8,15 @@ extends Node2D
 
 # Scene References
 const PIPES = preload("uid://bsgvy10wosw3c")
+var MAIN = load("uid://cmpyma78daeru")
 
 # Statics
 static var _vp_r: Rect2
+
+# Escape key press will take you back to the "main" scene
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("Exit"):                     
+		get_tree().change_scene_to_packed(MAIN)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -34,4 +40,5 @@ func spawn_new_pipe() -> void:
 	pipes_holder.add_child(new_pipe)
 
 func _on_plane_died() -> void:
-	get_tree().paused = true
+	#get_tree().paused = true
+	pass
