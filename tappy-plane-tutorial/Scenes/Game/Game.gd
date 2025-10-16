@@ -32,3 +32,6 @@ func spawn_new_pipe() -> void:
 	var y_pos: float = randf_range(upper_point.position.y, lower_point.position.y)
 	new_pipe.position = Vector2(_vp_r.end.x + 100, y_pos)
 	pipes_holder.add_child(new_pipe)
+
+func _on_plane_died() -> void:
+	get_tree().paused = true

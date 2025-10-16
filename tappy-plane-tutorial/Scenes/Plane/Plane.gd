@@ -1,7 +1,12 @@
 extends CharacterBody2D
 
+class_name Tappy
+
 # Getting the built in gravity value from project settings
 var _gravity: float = ProjectSettings.get("physics/2d/default_gravity")
+
+# Create plane died signal
+signal plane_died
 
 # Get the animation player. Using it for the jump animation
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -37,5 +42,6 @@ func fly(delta: float) -> void:
 		animation_player.play("Jump")
 
 func die() -> void:
+	plane_died.emit()
 	animated_sprite_2d.stop()
 	set_physics_process(false)

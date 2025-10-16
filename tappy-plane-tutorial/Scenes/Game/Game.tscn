@@ -20,7 +20,7 @@ position = Vector2(76, 472)
 [node name="PipesHolder" type="Node" parent="."]
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 1.6999999999999997
+wait_time = 1.6999999999999995
 autostart = true
 
 [node name="UpperPoint" type="Marker2D" parent="."]
@@ -29,4 +29,5 @@ position = Vector2(570, 200)
 [node name="LowerPoint" type="Marker2D" parent="."]
 position = Vector2(570, 600)
 
+[connection signal="plane_died" from="Plane" to="." method="_on_plane_died"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
