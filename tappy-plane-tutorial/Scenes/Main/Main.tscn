@@ -1,8 +1,54 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmpyma78daeru"]
+[gd_scene load_steps=10 format=3 uid="uid://cmpyma78daeru"]
 
 [ext_resource type="Texture2D" uid="uid://1124ccxmjbcq" path="res://assets/background/sky.png" id="1_p8rbg"]
 [ext_resource type="LabelSettings" uid="uid://dihpbkoqkxk0q" path="res://Resources/RedFont_96.tres" id="2_cmk6n"]
 [ext_resource type="LabelSettings" uid="uid://bo0mpmcwv5sfs" path="res://Resources/RedFont_28.tres" id="3_i3fi7"]
+[ext_resource type="FontFile" uid="uid://clg31m4dj1tqd" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="4_i3fi7"]
+[ext_resource type="AudioStream" uid="uid://s1pprcuysb1b" path="res://assets/audio/bgm_menu.mp3" id="5_o8wgc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_o8wgc"]
+font = ExtResource("4_i3fi7")
+font_size = 48
+shadow_color = Color(0.2, 0.42745098, 1, 1)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="Animation" id="Animation_i3fi7"]
+resource_name = "PlayFlash"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/PlayLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_o8wgc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/PlayLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w20t6"]
+_data = {
+&"PlayFlash": SubResource("Animation_i3fi7"),
+&"RESET": SubResource("Animation_o8wgc")
+}
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -59,3 +105,24 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 text = "0000"
 label_settings = ExtResource("3_i3fi7")
+
+[node name="PlayLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "PRESS SPACE
+TO 
+PLAY"
+label_settings = SubResource("LabelSettings_o8wgc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_w20t6")
+}
+autoplay = "PlayFlash"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_o8wgc")
+volume_db = -25.0
+autoplay = true
