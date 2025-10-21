@@ -6,7 +6,7 @@ class_name Tappy
 var _gravity: float = ProjectSettings.get("physics/2d/default_gravity")
 
 # Create plane died signal
-signal plane_died
+#signal plane_died # Moved to signal hub
 
 # Get the animation player. Using it for the jump animation
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -19,10 +19,6 @@ const JUMP_POWER: float = -350.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
 	pass
 
 # Use this function anytime you make any physics related changes
@@ -42,6 +38,6 @@ func fly(delta: float) -> void:
 		animation_player.play("Jump")
 
 func die() -> void:
-	plane_died.emit()
+	SignalHub.emit_on_plane_died()
 	animated_sprite_2d.stop()
 	set_physics_process(false)
