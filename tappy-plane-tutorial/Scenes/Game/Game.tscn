@@ -17,6 +17,7 @@ texture = ExtResource("1_rdw05")
 position = Vector2(76, 472)
 
 [node name="Barrier" parent="." instance=ExtResource("3_xbxml")]
+position = Vector2(-18, 0)
 
 [node name="PipesHolder" type="Node" parent="."]
 
