@@ -14,6 +14,10 @@ var _gravity: float = ProjectSettings.get("physics/2d/default_gravity")
 # Reference the animated_sprite_2d
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
+# Reference the audio stream player
+@onready var engine_sound: AudioStreamPlayer2D = $EngineSound
+
+
 # Constant for jump velocity
 const JUMP_POWER: float = -350.0
 
@@ -38,6 +42,7 @@ func fly(delta: float) -> void:
 		animation_player.play("Jump")
 
 func die() -> void:
+	engine_sound.stop()
 	SignalHub.emit_on_plane_died()
 	animated_sprite_2d.stop()
 	set_physics_process(false)
