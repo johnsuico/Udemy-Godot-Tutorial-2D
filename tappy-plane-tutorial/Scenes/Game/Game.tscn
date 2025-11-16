@@ -1,17 +1,16 @@
 [gd_scene load_steps=6 format=3 uid="uid://c1c81lbj2vx5p"]
 
 [ext_resource type="Script" uid="uid://bk76gt56cgx31" path="res://Scenes/Game/Game.gd" id="1_ln2h6"]
-[ext_resource type="Texture2D" uid="uid://xp7jdler5wwn" path="res://assets/background/rocks_2.png" id="1_rdw05"]
 [ext_resource type="PackedScene" uid="uid://b06cpw4nffcrp" path="res://Scenes/Plane/Plane.tscn" id="2_gwu2e"]
+[ext_resource type="PackedScene" uid="uid://cr3pdts11u0va" path="res://Scenes/ParallaxBg/ParallaxBg.tscn" id="2_y3kpf"]
 [ext_resource type="PackedScene" uid="uid://ce1xw661g1ule" path="res://Scenes/Barrier/Barrier.tscn" id="3_xbxml"]
 [ext_resource type="PackedScene" uid="uid://cc6lr27mk3ajg" path="res://Scenes/GameUI/GameUi.tscn" id="5_y3kpf"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_ln2h6")
 
-[node name="Rocks2" type="Sprite2D" parent="."]
-position = Vector2(198, 411)
-texture = ExtResource("1_rdw05")
+[node name="ParallaxBg" parent="." instance=ExtResource("2_y3kpf")]
+scale = Vector2(0.79, 0.79)
 
 [node name="Plane" parent="." instance=ExtResource("2_gwu2e")]
 position = Vector2(76, 472)
